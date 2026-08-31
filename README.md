@@ -6,27 +6,20 @@ This is not a licensed index product. Constituents are scraped from Wikipedia's 
 
 ## Quickstart (VPS)
 
-From the directory that contains this README:
+One command, as your user. Installs to `~/paper-desk`. No sudo.
 
 ```bash
-python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-cp .env.example .env
-(crontab -l 2>/dev/null; cat crontab.example) | crontab -
+curl -fsSL https://raw.githubusercontent.com/bigmisiu/paper-desk/main/install.sh | bash
 ```
 
-Edit `.env`: Polygon key (optional but recommended), a real email in `SEC_USER_AGENT`, and the Gekko webhook URL + sender key from the routine **Paper desk scan inbound**. Never commit `.env`. Edit the path in `crontab.example` (default `/opt/paper-desk-drop`) before installing cron. Cron line is `30 6 * * 1-5` with `CRON_TZ=America/Los_Angeles`. After each run the scanner POSTs `notes/YYYY-MM-DD.md` to Gekko so you do not paste files.
+Then edit `~/paper-desk/.env` (Polygon, SEC email, Gekko webhook). Cron is already `30 6 * * 1-5` PT.
 
-Manual run (same as cron):
+Manual run:
 
 ```bash
-.venv/bin/python -m desk
+~/paper-desk/.venv/bin/python -m desk
 ```
 
-Python 3.11 or newer. Writes:
-
-- `notes/YYYY-MM-DD.md` — ranked table (Pacific date)
-- `data/scan.sqlite` — bars + constituents cache
-- `blotter.csv` — header created if missing, never overwritten
 
 ## What it does
 
