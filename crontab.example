@@ -1,0 +1,7 @@
+# Weekday 6:30am Pacific. CRON_TZ is honored by Debian/Ubuntu cron and cronie.
+SHELL=/bin/bash
+CRON_TZ=America/Los_Angeles
+
+# Install the drop somewhere stable, then adjust the path.
+# Logs append under data/cron.log (directory is created by the scanner).
+30 6 * * 1-5 cd /opt/paper-desk-drop && .venv/bin/python -m desk >> /opt/paper-desk-drop/data/cron.log 2>&1
